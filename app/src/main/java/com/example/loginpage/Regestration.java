@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
@@ -39,6 +41,41 @@ public class Regestration extends AppCompatActivity {
         txtemail=findViewById(R.id.textInputLayout6);
         txtcontactno=findViewById(R.id.textInputLayout5);
 
+        email.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                txtemail.setError(null);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+        contact.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                txtcontactno.setError(null);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+
 
         btnSignup.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,7 +90,7 @@ public class Regestration extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),"Invalid contact number", Toast.LENGTH_SHORT).show();
                 }
                 else  {
-                    checkemail(email);
+                    checkemail();
                 }
 
             }
@@ -69,7 +106,7 @@ public class Regestration extends AppCompatActivity {
 
     }
 
-    public void checkemail(EditText email) {
+    public void checkemail() {
 
         RegestrationRequest regestrationRequest =new RegestrationRequest();
         regestrationRequest.setEmail(this.email.getText().toString());
@@ -83,8 +120,8 @@ public class Regestration extends AppCompatActivity {
                     txtemail.setError("Email id already registered");
                 }
                 else if(result.equals("0")){
-                    txtemail.setError(null);
-                    checkphoneNo(contact);
+                  //  txtemail.setError(null);
+                    checkphoneNo();
                 }
             }
             @Override
@@ -95,7 +132,7 @@ public class Regestration extends AppCompatActivity {
 
     }
 
-    public void checkphoneNo(EditText contact) {
+    public void checkphoneNo() {
 
         RegestrationRequest regestrationRequest =new RegestrationRequest();
         regestrationRequest.setContact(this.contact.getText().toString());
@@ -109,7 +146,7 @@ public class Regestration extends AppCompatActivity {
                     txtcontactno.setError(" Phone number already registered");
                 }
                 else if(result.equals("0")){
-                    txtcontactno.setError(null);
+                    //txtcontactno.setError(null);
                     regestration();
                 }
 
