@@ -2,6 +2,7 @@ package com.example.loginpage;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -22,9 +23,10 @@ import retrofit2.Response;
 
 public class Regestration extends AppCompatActivity {
 
-    EditText email,password,address,contact,name;
+    EditText email,password,address,contact,name,cpassword;
     Button btnSignup,btnLogin;
-    TextInputLayout txtemail,txtcontactno;
+    TextInputLayout txtemail,txtcontactno,txtcpwd,txtpwd;
+    boolean pwrd=false,cpwrd=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +42,9 @@ public class Regestration extends AppCompatActivity {
         btnLogin=findViewById(R.id.btn_Login);
         txtemail=findViewById(R.id.textInputLayout6);
         txtcontactno=findViewById(R.id.textInputLayout5);
+        cpassword=findViewById(R.id.et_cpwd);
+        txtcpwd=findViewById(R.id.textInputLayout8);
+        txtpwd=findViewById(R.id.textInputLayout7);
 
         email.addTextChangedListener(new TextWatcher() {
             @Override
@@ -74,9 +79,57 @@ public class Regestration extends AppCompatActivity {
 
             }
         });
+        password.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
+            }
 
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if(password.getText().toString().trim().length()<8)
+                {
+                    txtpwd.setError("Password must be >7 characters");
+                }
+                else
+                {
+                    txtpwd.setError(null);
+                    pwrd=true;
 
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+        cpassword.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                String p1=password.getText().toString().trim();
+                String p2=cpassword.getText().toString().trim();
+                if(p2.equals(p1))
+                {
+                    txtcpwd.setError(null);
+                    cpwrd=true;
+                }
+                else
+                {
+                    txtcpwd.setError("Password does not matched");
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
         btnSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -89,7 +142,7 @@ public class Regestration extends AppCompatActivity {
                 else if(! validatePhoneNumber(contact)){
                     Toast.makeText(getApplicationContext(),"Invalid contact number", Toast.LENGTH_SHORT).show();
                 }
-                else  {
+                else if(cpwrd && pwrd) {
                     checkemail();
                 }
 

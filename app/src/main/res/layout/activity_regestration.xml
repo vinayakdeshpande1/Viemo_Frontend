@@ -146,6 +146,26 @@
                 android:inputType="textWebPassword" />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayout8"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginTop="10dp"
+            android:hint="Enter Password again"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayout7"
+            app:passwordToggleEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_cpwd"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:inputType="textWebPassword" />
+        </com.google.android.material.textfield.TextInputLayout>
+
         <Button
             android:id="@+id/btn_SignUp"
             android:layout_width="0dp"
@@ -163,7 +183,7 @@
             android:text="Submit"
             android:textAllCaps="false"
             android:textSize="12sp"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayout7"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayout8"
             app:layout_constraintEnd_toEndOf="parent" />
 
         <Button
@@ -184,7 +204,7 @@
             android:textAllCaps="false"
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayout7" />
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayout8" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
