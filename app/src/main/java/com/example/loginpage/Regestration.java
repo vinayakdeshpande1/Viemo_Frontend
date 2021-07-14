@@ -90,6 +90,7 @@ public class Regestration extends AppCompatActivity {
                 if(password.getText().toString().trim().length()<8)
                 {
                     txtpwd.setError("Password must be >7 characters");
+                    pwrd=false;
                 }
                 else
                 {
@@ -122,6 +123,7 @@ public class Regestration extends AppCompatActivity {
                 else
                 {
                     txtcpwd.setError("Password does not matched");
+                    cpwrd=false;
                 }
             }
 
@@ -173,7 +175,7 @@ public class Regestration extends AppCompatActivity {
                     txtemail.setError("Email id already registered");
                 }
                 else if(result.equals("0")){
-                  //  txtemail.setError(null);
+
                     checkphoneNo();
                 }
             }
@@ -235,9 +237,6 @@ public class Regestration extends AppCompatActivity {
         regestrationRequest.setAddress(address.getText().toString());
         regestrationRequest.setPassword(password.getText().toString());
         regestrationRequest.setContact(contact.getText().toString());
-
-
-
         Call<String> regestrationResponceCall = ApiClient.getUserService().userRegestration(regestrationRequest);
        regestrationResponceCall.enqueue(new Callback<String>(){
            @Override
